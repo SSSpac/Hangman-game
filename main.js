@@ -1,38 +1,29 @@
-//letters 
+// letters  
 const letters = "abcdefghijklmnopqrstuvwxyz";
 
-//Getting the array from letters 
+// Getting the array from letters 
+let lettersArray = Array.from(letters);
 
-let lettersArray = Array.from(letters)
-
-//selecting the letter container 
+// Selecting the letter container 
 let lettersContainer = document.querySelector(".letters");
 
-//generating the letters 
+// Generating the letters 
 lettersArray.forEach(letter => {
-
     let span = document.createElement("span");
-
     let theLetter = document.createTextNode(letter);
-
     span.appendChild(theLetter);
     span.className = 'letter-box';
-
     lettersContainer.appendChild(span);
-
 });
 
-// object of words and a category 
-
+// Object of words and a category 
 const words =  {
-    movies: ["Avatar" , "Toy story", "The god father" , "inception" , "Men in Black" , "Parasite"],
-    sports: ["Swimming" , "Tennis" , "Surfing" , "Boxing" , "Hockey" , "Gymnastics"]
-}
+    movies: ["Avatar", "Toy story", "The god father", "Inception", "Men in Black", "Parasite"],
+    sports: ["Swimming", "Tennis", "Surfing", "Boxing", "Hockey", "Gymnastics"]
+};
 
-// get random propertyies 
-
+// Get random properties 
 let allKeys = Object.keys(words);
-
 let randomPropNumber = Math.floor(Math.random() * allKeys.length);
 let randomPropName = allKeys[randomPropNumber];
 let randomPropValue = words[randomPropName];
@@ -40,25 +31,50 @@ let randomPropValue = words[randomPropName];
 let randomValueNumber = Math.floor(Math.random() * randomPropValue.length);
 let randomValueValue = randomPropValue[randomValueNumber];
 
-// set the info for the category 
-
+// Set the info for the category 
 document.querySelector(".game-info .category span").innerHTML = randomPropName;
 
-//select letters gues elements
+// Select letters guess elements
 let lettersGuessContainer = document.querySelector(".letters-guess");
 
-// converting the chosesn word to an array 
-
+// Converting the chosen word to an array 
 let lettersAndSpace = Array.from(randomValueValue);
 console.log(lettersAndSpace);
 
-// create the spans depending on the word 
+// Create the spans depending on the word 
 lettersAndSpace.forEach(letter => {
     let emptySpan = document.createElement("span");
-    if(letter === '') {
+    if (letter === '') {
         emptySpan.className = 'with-space';
+        emptySpan.innerHTML = ' '; // Placeholder for spaces
+    } else {
+        emptySpan.innerHTML = '_'; // Placeholder for guessed letters
     }
-    
     lettersGuessContainer.appendChild(emptySpan);
+});
 
+// Selecting the guessed spans
+let guessSpans = document.querySelectorAll(".letters-guess span");
+
+// Handling the click on letters 
+document.addEventListener("click", (e) => {
+    if (e.target.className === 'letter-box') {
+        e.target.classList.add("clicked");
+
+        let theClickedLetter = e.target.innerHTML.toLowerCase();
+
+        let theChosenWord = randomValueValue.toLowerCase();
+
+        // The chosen word
+        theChosenWord.split('').forEach((wordLetter, Wordindex) => {
+            if (theClickedLetter === wordLetter) {
+                // The loop on the spans
+                guessSpans.forEach((span, spanIndex) => {
+                    if (Wordindex === spanIndex) {
+                        span.innerHTML = theClickedLetter;
+                    }
+                });
+            }
+        });
+    }
 });
