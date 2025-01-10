@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hanfman game</title>
-    <link rel="stylesheet" href="hangman.css">
-</head>
-<body>
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="./style/hangman.css">
+    <script src="./js/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <button class="theme-toggle">Switch Theme</button>
+
     <div class="container">
       <div class="game-info">
-        <div class="game-name">Hangman</div>
+        <div class="game-name">Hanfman</div>
         <div class="category">
-    the word from: <span></span>
+          The Word From: <span></span>
         </div>
       </div>
-    <hr>
-    <div class="row">
-    <div class="hangman-draw">
-        <div class="the-draw">
-         <div class="the-stand"></div>
-         <div class="the-hang"></div>
-         <div class="the-rope"></div>
-         <div class="the-man">
-           <div class="head"></div>
-           <div class="body"></div>
-           <div class="hands"></div>
-           <div class="legs"></div>
-        </div>
+
+      <div class="game-stats">
+        Games you Played: 0 | Wins: 0 | Losses: 0
       </div>
+
+      <hr>
+      <div class="row">
+        <div class="hangman-draw">
+          <div class="the-draw">
+            <div class="the-stand"></div>
+            <div class="the-hang"></div>
+            <div class="the-rope"></div>
+            <div class="the-man">
+              <div class="head"></div>
+              <div class="body"></div>
+              <div class="hands"></div>
+              <div class="legs"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="letters"></div>
+      </div>
+      <hr>
+      <div class="letters-guess"></div>
     </div>
-     <div class="letters"></div>
-    </div>
-     <hr>
-     <div class="letters-guess"></div>
-  </div>
-  <script src="main.js"></script>
+    <audio id="success" src="../audio/win.mp3" preload="auto"></audio>
+    <audio id="fail" src="../audio/fail.mp3" preload="auto"></audio>
+    <script src="./js/main.js"></script>
   </body>
 </html>
